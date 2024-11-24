@@ -8,24 +8,17 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            line-height: 1.6;
         }
         header {
-            background-color: #f9a826;
+            background-color: #FFA500;
             color: white;
-            padding: 1rem;
             text-align: center;
-        }
-        header h1 {
-            margin: 0;
-        }
-        #search {
-            margin-top: 1rem;
+            padding: 1rem;
         }
         nav {
-            background-color: #f5f5f5;
-            padding: 1rem;
+            background-color: #F5F5F5;
             text-align: center;
+            padding: 1rem;
         }
         nav a {
             margin: 0 10px;
@@ -33,13 +26,18 @@
             text-decoration: none;
         }
         nav a:hover {
-            color: #f9a826;
+            color: #FFA500;
         }
         section {
             padding: 1rem;
         }
-        .category, .region {
-            margin-bottom: 2rem;
+        article {
+            margin-bottom: 1.5rem;
+        }
+        aside {
+            background-color: #FFF8DC;
+            padding: 1rem;
+            margin-top: 1rem;
         }
         footer {
             background-color: #333;
@@ -47,91 +45,69 @@
             text-align: center;
             padding: 1rem;
         }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
+        figure {
+            margin: 0;
         }
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        figcaption {
+            font-size: 0.8rem;
+            text-align: center;
         }
         .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
         }
-        .card h3 {
-            margin: 0;
-            padding: 0.5rem;
-        }
-        .card p {
-            padding: 0 0.5rem 0.5rem;
-            font-size: 0.9rem;
-            color: #555;
+        .rating {
+            font-size: 1rem;
+            color: #FFD700;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>충남대 근처 맛집 지도</h1>
-        <div id="search">
-            <input type="text" placeholder="맛집 검색..." style="padding: 0.5rem; width: 80%; border-radius: 5px; border: 1px solid #ccc;">
-            <button style="padding: 0.5rem; background-color: #f9a826; border: none; color: white; border-radius: 5px;">검색</button>
-        </div>
     </header>
 
     <nav>
         <a href="#popular">인기 맛집</a>
-        <a href="#categories">카테고리별</a>
+        <a href="#categories">카테고리</a>
         <a href="#regions">지역별</a>
     </nav>
 
     <section id="popular">
         <h2>인기 맛집</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="https://via.placeholder.com/300" alt="맛집 이미지">
-                <h3>맛집 1</h3>
-                <p>한식 전문점, 인기 메뉴: 갈비탕</p>
-            </div>
-            <div class="card">
-                <img src="https://via.placeholder.com/300" alt="맛집 이미지">
-                <h3>맛집 2</h3>
-                <p>디저트 카페, 인기 메뉴: 초코 케이크</p>
-            </div>
-        </div>
+        <article>
+            <figure>
+                <img src= alt="맛집 이미지">
+                <figcaption>마인네</figcaption>
+            </figure>
+            <p class="rating">★★★★☆</p>
+        </article>
+        <article>
+            <figure>
+                <img src= alt="맛집 이미지">
+                <figcaption>쵸피</figcaption>
+            </figure>
+            <p class="rating">★★★★★</p>
+        </article>
     </section>
 
     <section id="categories">
         <h2>카테고리별 맛집</h2>
-        <div class="category">
-            <h3>한식</h3>
-            <p>고깃집, 전통 음식점</p>
-        </div>
-        <div class="category">
-            <h3>카페</h3>
-            <p>디저트 카페, 브런치 전문점</p>
-        </div>
+        <aside>
+            <mark>한식</mark>, <mark>중식</mark>, <mark>일식</mark>, <mark>디저트</mark>, <mark>카페</mark>, 
+        </aside>
     </section>
 
     <section id="regions">
         <h2>지역별 맛집</h2>
-        <div class="region">
-            <h3>궁동</h3>
-            <p>궁동의 다양한 한식 및 중식 맛집</p>
-        </div>
-        <div class="region">
-            <h3>죽동</h3>
-            <p>죽동의 분위기 좋은 디저트 카페</p>
-        </div>
+        <p>궁동, 죽동, 봉명동 등 캠퍼스 지역 맛집을 확인해보세요!</p>
+        <time datetime="2024-11-24">최종 업데이트: 2024년 11월 24일</time>
     </section>
 
     <footer>
-        <p>© 2024 정지오 | Email: jiwo@example.com</p>
+        <p>202401669 정지오</p>
     </footer>
 </body>
 </html>
+
