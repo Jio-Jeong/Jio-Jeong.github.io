@@ -8,113 +8,195 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
         }
         header {
             background-color: #FFA500;
             color: white;
             text-align: center;
-            padding: 1rem;
+            padding: 1rem 0.5rem;
         }
-        nav {
-            background-color: #F5F5F5;
-            text-align: center;
-            padding: 1rem;
+        .search-bar {
+            margin-top: 1rem;
         }
-        nav a {
-            margin: 0 10px;
-            color: #333;
-            text-decoration: none;
+        .search-bar input {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 80%;
+            border: none;
+            border-radius: 4px;
         }
-        nav a:hover {
-            color: #FFA500;
+        .search-bar button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 4px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
         }
         section {
             padding: 1rem;
         }
         article {
-            margin-bottom: 1.5rem;
-        }
-        aside {
-            background-color: #FFF8DC;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1rem;
         }
         figure {
             margin: 0;
         }
         figcaption {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             text-align: center;
-        }
-        .card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
+            margin-top: 0.5rem;
         }
         .rating {
             font-size: 1rem;
             color: #FFD700;
         }
+        .rating-input {
+            margin-top: 0.5rem;
+        }
+        .average-rating {
+            font-weight: bold;
+            color: #333;
+            margin-top: 0.5rem;
+        }
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .categories a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #FFA500;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        .categories a:hover {
+            background-color: #0056b3;
+        }
     </style>
+    <script>
+        function addRating(articleId) {
+            const ratingInput = document.querySelector(`#${articleId} .rating-input input:checked`);
+            if (ratingInput) {
+                const rating = parseInt(ratingInput.value);
+                const ratingListElement = document.querySelector(`#${articleId} .rating-list`);
+                const ratings = JSON.parse(ratingListElement.dataset.ratings || "[]");
+                ratings.push(rating);
+                ratingListElement.dataset.ratings = JSON.stringify(ratings);
+                updateAverageRating(articleId, ratings);
+            }
+        }
+
+        function updateAverageRating(articleId, ratings) {
+            if (ratings.length > 0) {
+                const total = ratings.reduce((sum, rating) => sum + rating, 0);
+                const average = (total / ratings.length).toFixed(1);
+                document.querySelector(`#${articleId} .average-rating`).textContent = `평균 별점: ${average} / 5 (${ratings.length}명)`;
+            }
+        }
+
+        function searchGoogle() {
+            const query = document.getElementById("search-input").value;
+            if (query.trim() !== "") {
+                const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                window.open(url, "_blank");
+            } else {
+                alert("검색어를 입력하세요.");
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
         <h1>충남대 근처 맛집 지도</h1>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="검색어를 입력하세요...">
+            <button onclick="searchGoogle()">검색</button>
+        </div>
     </header>
 
-    <nav>
-        <a href="#popular">인기 맛집</a>
-        <a href="#categories">카테고리</a>
-        <a href="#regions">지역별</a>
-    </nav>
-
     <section id="popular">
-        <h2>인기 맛집</h2>
-        <article>
+        <h2>Top3 인기 맛집</h2>
+        <article id="restaurant-1">
             <figure>
-                <img src= alt="https://private-user-images.githubusercontent.com/180914976/392266975-98840646-b35b-42dd-80ed-a3355d65fd56.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzMzMDYxNDEsIm5iZiI6MTczMzMwNTg0MSwicGF0aCI6Ii8xODA5MTQ5NzYvMzkyMjY2OTc1LTk4ODQwNjQ2LWIzNWItNDJkZC04MGVkLWEzMzU1ZDY1ZmQ1Ni5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMjA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTIwNFQwOTUwNDFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0wN2MxNjI3N2U1ODFjMzI4ZmY2ZjQ1NjFiZTc0MWUzNmE5NzU1ZjllZjU4YWU4NGY3OTZhODcxOThiMmExNjRlJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.ZbCvfKOKnibGPl0zdFA9W5XkPUXkmF3Fu-LTjKDN6ek">
+                <img src="https://private-user-images.githubusercontent.com/180914976/392266973-fa5647b7-0d37-40a7-9a41-721437cad13e.jpg" alt="마인네 외부 사진">
                 <figcaption>마인네</figcaption>
             </figure>
-            <p class="rating">★★★★★</p>
+            <p class="rating">제작자 추천도: ★★★★★</p>
+            <div class="rating-input">
+                <label><input type="radio" name="rating-restaurant-1" value="1">1</label>
+                <label><input type="radio" name="rating-restaurant-1" value="2">2</label>
+                <label><input type="radio" name="rating-restaurant-1" value="3">3</label>
+                <label><input type="radio" name="rating-restaurant-1" value="4">4</label>
+                <label><input type="radio" name="rating-restaurant-1" value="5">5</label>
+                <button onclick="addRating('restaurant-1')">평가</button>
+            </div>
+            <p class="average-rating">평균 별점: -</p>
+            <div class="rating-list" data-ratings="[]"></div>
         </article>
-        <article>
+        <article id="restaurant-2">
             <figure>
-                <img src= alt="맛집 이미지">
+                <img src="https://private-user-images.githubusercontent.com/180914976/392267001-89338ed7-b68d-4101-8c83-ab441654b6cb.jpg" alt="천복 순대국밥 외부 사진">
                 <figcaption>천복 순대국밥</figcaption>
             </figure>
-            <p class="rating">★★★★</p>
+            <p class="rating">제작자 추천도: ★★★★</p>
+            <div class="rating-input">
+                <label><input type="radio" name="rating-restaurant-2" value="1">1</label>
+                <label><input type="radio" name="rating-restaurant-2" value="2">2</label>
+                <label><input type="radio" name="rating-restaurant-2" value="3">3</label>
+                <label><input type="radio" name="rating-restaurant-2" value="4">4</label>
+                <label><input type="radio" name="rating-restaurant-2" value="5">5</label>
+                <button onclick="addRating('restaurant-2')">평가</button>
+            </div>
+            <p class="average-rating">평균 별점: -</p>
+            <div class="rating-list" data-ratings="[]"></div>
         </article>
-        <article>
+        <article id="restaurant-3">
             <figure>
-                <img src= alt="맛집 이미지">
+                <img src="https://private-user-images.githubusercontent.com/180914976/392266986-1e23fe5c-7d4b-4983-b7c2-959a031464a0.jpg" alt="유성불백 외부 사진">
                 <figcaption>유성불백</figcaption>
             </figure>
-            <p class="rating">★★★★☆</p>
+            <p class="rating">제작자 추천도: ★★★★☆</p>
+            <div class="rating-input">
+                <label><input type="radio" name="rating-restaurant-3" value="1">1</label>
+                <label><input type="radio" name="rating-restaurant-3" value="2">2</label>
+                <label><input type="radio" name="rating-restaurant-3" value="3">3</label>
+                <label><input type="radio" name="rating-restaurant-3" value="4">4</label>
+                <label><input type="radio" name="rating-restaurant-3" value="5">5</label>
+                <button onclick="addRating('restaurant-3')">평가</button>
+            </div>
+            <p class="average-rating">평균 별점: -</p>
+            <div class="rating-list" data-ratings="[]"></div>
         </article>
     </section>
 
     <section id="categories">
-        <h2>카테고리별 맛집</h2>
-        <aside>
-            <mark>한식</mark>, <mark>중식</mark>, <mark>일식</mark>, <mark>디저트</mark>, <mark>카페</mark>, 
-        </aside>
-    </section>
-
-    <section id="regions">
-        <h2>지역별 맛집</h2>
-        <p>궁동, 죽동, 봉명동 등 캠퍼스 지역 맛집을 확인해보세요!</p>
-        <time datetime="2024-11-24">최종 업데이트: 2024년 11월 24일</time>
-    </section>
-
-    <footer>
-        <p>202401669 정지오</p>
-    </footer>
-</body>
-</html>
-
+        <h    <section id="categories">
+            <h2>카테고리별 맛집</h2>
+            <div class="categories">
+                <a href="#korean">한식</a>
+                <a href="#chinese">중식</a>
+                <a href="#japanese">일식</a>
+                <a href="#dessert">디저트</a>
+                <a href="#cafe">카페</a>
+            </div>
+        </section>
+    
+        <footer>
+            <p>2024 충남대 맛집 지도 | 202401669 정지오</p>
+        </footer>
+    </body>
+    </html>
+    
