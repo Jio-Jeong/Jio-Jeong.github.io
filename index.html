@@ -4,88 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>충남대 맛집 지도</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            scroll-behavior: smooth;
-        }
-        header {
-            background-color: #FFA500;
-            color: white;
-            text-align: center;
-            padding: 1rem 0.5rem;
-        }
-        .search-bar {
-            margin-top: 1rem;
-        }
-        .search-bar input {
-            padding: 0.5rem;
-            font-size: 1rem;
-            width: 80%;
-            border: none;
-            border-radius: 4px;
-        }
-        .search-bar button {
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            border: none;
-            border-radius: 4px;
-            background-color: #333;
-            color: white;
-            cursor: pointer;
-            margin-left: 0.5rem;
-        }
-        .search-bar button:hover {
-            background-color: #0056b3;
-        }
-        section {
-            padding: 1rem;
-        }
-        article {
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 1rem;
-        }
-        figure {
-            margin: 0;
-        }
-        figcaption {
-            font-size: 0.9rem;
-            text-align: center;
-            margin-top: 0.5rem;
-        }
-        .rating {
-            font-size: 1rem;
-            color: #FFD700;
-        }
-        .rating-input {
-            margin-top: 0.5rem;
-        }
-        .average-rating {
-            font-weight: bold;
-            color: #333;
-            margin-top: 0.5rem;
-        }
-        .categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        .categories a {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background-color: #FFA500;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 0.9rem;
-        }
-        .categories a:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
     <script>
         function addRating(articleId) {
             const ratingInput = document.querySelector(`#${articleId} .rating-input input:checked`);
@@ -122,7 +41,7 @@
     <header>
         <h1>충남대 근처 맛집 지도</h1>
         <div class="search-bar">
-            <input type="text" id="search-input" placeholder="검색어를 입력하세요...">
+            <input type="text" id="search-input" placeholder="근처 맛집을 찾아보세요!">
             <button onclick="searchGoogle()">검색</button>
         </div>
     </header>
@@ -131,8 +50,8 @@
         <h2>Top3 인기 맛집</h2>
         <article id="restaurant-1">
             <figure>
-                <img src="https://private-user-images.githubusercontent.com/180914976/392266973-fa5647b7-0d37-40a7-9a41-721437cad13e.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzQ3MDQ5MjQsIm5iZiI6MTczNDcwNDYyNCwicGF0aCI6Ii8xODA5MTQ5NzYvMzkyMjY2OTczLWZhNTY0N2I3LTBkMzctNDBhNy05YTQxLTcyMTQzN2NhZDEzZS5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTIyMFQxNDIzNDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1hYzUxODg5YWI3ZWFhNjVmZmJhZDZkZmFiZTI5N2JjN2ZjZTI5OWI0YzMwN2RiMDExYjQxYjhmY2JiNjU2YmYxJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.WRZVkzxl6gr6Lt3aymnjXeejXoEWz-pvxsauYQ36xOg" width="500" alt="마인네 외부 사진">
-                <p style="text-align:left"></p>마인네
+                <img src="마인네.jpg" alt="마인네 외부 사진" width="300">
+                <figcaption>마인네</figcaption>
             </figure>
             <p class="rating">제작자 추천도: ★★★★★</p>
             <div class="rating-input">
@@ -148,8 +67,8 @@
         </article>
         <article id="restaurant-2">
             <figure>
-                <img src="https://private-user-images.githubusercontent.com/180914976/392267001-89338ed7-b68d-4101-8c83-ab441654b6cb.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzQ3MDQ5MjQsIm5iZiI6MTczNDcwNDYyNCwicGF0aCI6Ii8xODA5MTQ5NzYvMzkyMjY3MDAxLTg5MzM4ZWQ3LWI2OGQtNDEwMS04YzgzLWFiNDQxNjU0YjZjYi5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTIyMFQxNDIzNDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iOGY2MGE2MWM2ZWEyNjU0YTVhN2FhMTJkZjE2OGI2MGM0NjFlN2Q5MmIzMjMwZTMyM2I0NDg3ZTZhZWY4NTUyJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.fOLVZpmlT2Dzqub5OmjqxZAgUsndQ8jTspR8iwFu1AQ" width="500" alt="천복 순대국밥 외부 사진">
-                <p style="text-align:left"></p>천복 순대국밥
+                <img src="천복.jpg" alt="천복 순대국밥 외부 사진" width="300">
+                <figcaption>천복 순대국밥</figcaption>
             </figure>
             <p class="rating">제작자 추천도: ★★★★</p>
             <div class="rating-input">
@@ -165,8 +84,8 @@
         </article>
         <article id="restaurant-3">
             <figure>
-                <img src="https://private-user-images.githubusercontent.com/180914976/392266986-1e23fe5c-7d4b-4983-b7c2-959a031464a0.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzQ3MDQ5MjQsIm5iZiI6MTczNDcwNDYyNCwicGF0aCI6Ii8xODA5MTQ5NzYvMzkyMjY2OTg2LTFlMjNmZTVjLTdkNGItNDk4My1iN2MyLTk1OWEwMzE0NjRhMC5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMjIwJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTIyMFQxNDIzNDRaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0xYWZjOTA3YTM2ZDQ4ODlhZGRlZDI4ZmNkM2MxNDJjMmIxYjViYzM2MWRhZDE4NWIxYjNiNDc2NGZjY2Y1NWFiJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.sdnE7eBnJ8TxUI8C2SPcyLxHaf8JfDMGk7PqSAFts6o" width="500" alt="유성불백 외부 사진">
-                <p style="text-align:left"></p>유성불백
+                <img src="유성불백.jpg" alt="유성불백 외부 사진" width="300">
+                <figcaption>유성불백</figcaption>
             </figure>
             <p class="rating">제작자 추천도: ★★★★☆</p>
             <div class="rating-input">
@@ -183,20 +102,21 @@
     </section>
 
     <section id="categories">
-        <h    <section id="categories">
-            <h2>카테고리별 맛집(준비중)</h2>
-            <div class="categories">
-                <a href="#korean">한식</a>
-                <a href="#chinese">중식</a>
-                <a href="#japanese">일식</a>
-                <a href="#dessert">디저트</a>
-                <a href="#cafe">카페</a>
-            </div>
-        </section>
-    
-        <footer>
-            <p>2024 충남대 맛집 지도 | 202401669 정지오</p>
-        </footer>
+        <h2>카테고리별 맛집</h2>
+        <div class="categories">
+            <a href="https://www.google.co.kr/maps/search/%EC%9C%A0%EC%84%B1+%ED%95%9C%EC%8B%9D?hl=ko&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">한식</a>
+            <a href="https://www.google.co.kr/maps/search/%EC%9C%A0%EC%84%B1+%EC%A4%91%EC%8B%9D/data=!3m1!4b1?hl=ko&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">중식</a>
+            <a href="https://www.google.co.kr/maps/search/%EC%9C%A0%EC%84%B1+%EC%9D%BC%EC%8B%9D?hl=ko&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">일식</a>
+            <a href="https://www.google.co.kr/maps/search/%EC%9C%A0%EC%84%B1+%EB%94%94%EC%A0%80%ED%8A%B8?hl=ko&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">디저트</a>
+            <a href="https://www.google.co.kr/maps/search/%EC%9C%A0%EC%84%B1+%EC%B9%B4%ED%8E%98?hl=ko&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">카페</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>2024 충남대 맛집 지도 | 202401669 정지오</p>
+    </footer>
+</body>
+</html>
     </body>
     </html>
     
