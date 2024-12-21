@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>충남대 맛집 지도</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function addRating(articleId) {
+            const ratingInput = document.querySelector(`#${articleId} .rating-input input:checked`);
+            if (ratingInput) {
+                const rating = parseInt(ratingInput.value);
+                const ratingListElement = document.querySelector(`#${articleId} .rating-list`);
+                const ratings = JSON.parse(ratingListElement.dataset.ratings || "[]");
+                ratings.push(rating);
+                ratingListElement.dataset.ratings = JSON.stringify(ratings);
+                updateAverageRating(articleId, ratings);
+            }
+        }
+
+        function updateAverageRating(articleId, ratings) {
+            if (ratings.length > 0) {
+                const total = ratings.reduce((sum, rating) => sum + rating, 0);
+                const average = (total / ratings.length).toFixed(1);
+                document.querySelector(`#${articleId} .average-rating`).textContent = `평균 별점: ${average} / 5 (${ratings.length}명)`;
+            }
+        }
+
+        function searchGoogle() {
+            const query = document.getElementById("search-input").value;
+            if (query.trim() !== "") {
+                const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                window.open(url, "_blank");
+            } else {
+                alert("검색어를 입력하세요.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>충남대 근처 맛집 지도</h1>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="근처 맛집을 찾아보세요!">
+            <button onclick="searchGoogle()">검색</button>
+        </div>
+    </header>
+
+    <section id="popular">
+        <h2>Top3 인기 맛집</h2>
+        <article id="restaurant-1">
+            <figure>
+                <img src="마인네.jpg" alt="마인네 외부 사진" width="300">
+                <figcaption>마인네</figcaption>
+            </figure>
+            <p class="rating">제작자 추천도: ★★★★★</p>
+            <div class="rating-input">
+                <label><input type="radio" name="rating-restaurant-1" value="1">1</label>
+                <label><input type="radio" name="rating-restaurant-1" value="2">2</label>
+                <label><input type="radio" name="rating-restaurant-1" value="3">3</label>
+                <label><input type="radio" name="rating-restaurant-1" value="4">4</label>
+                <label><input type="radio" name="rating-restaurant-1" value="5">5</label>
+                <button onclick="addRating('restaurant-1')">평가</button>
+            </div>
+            <p class="average-rating">평균 별점: -</p>
+            <div class="rating-list" data-ratings="[]"></div>
+        </article>
+        <article id="restaurant-2">
+            <figure>
+                <img src="천복.jpg" alt="천복 순대국밥 외부 사진" width="300">
+                <figcaption>천복 순대국밥</figcaption>
+            </figure>
+            <p class="rating">제작자 추천도: ★★★★</p>
+            <div class="rating-input">
+                <label><input type="radio" name="rating-restaurant-2" value="1">1</label>
+                <label><input type="radio" name="rating-restaurant-2" value="2">2</label>
+                <label><input type="radio" name="rating-restaurant-2" value="3">3</label>
+                <label><input type="radio" name="rating-restaurant-2" value="4">4</label>
+                <label><input type="radio" name="rating-restaurant-2" value="5">5</label>
+                <button onclick="addRating('restaurant-2')">평가</button>
+            </div>
+            <p class="average-rating">평균 별점: -</p>
+            <div class="rating-list" data-ratings="[]"></div>
+        </article>
+        <article id="restaurant-3">
+            <figure>
+                <img src="유성불백.jpg" alt="유성불백 외부 사진" width="300">
+                <figcaption>유성불백</figcaption>
+            </figure>
+            <p class="rating">제작자 추천도: ★★★★☆</p>
+            <div class="rating-input">
+                <label><input type="radio" name="rating-restaurant-3" value="1">1</label>
+                <label><input type="radio" name="rating-restaurant-3" value="2">2</label>
+                <label><input type="radio" name="rating-restaurant-3" value="3">3</label>
+                <label><input type="radio" name="rating-restaurant-3" value="4">4</label>
+                <label><input type="radio" name="rating-restaurant-3" value="5">5</label>
+                <button onclick="addRating('restaurant-3')">평가</button>
+            </div>
+            <p class="average-rating">평균 별점: -</p>
+            <div class="rating-list" data-ratings="[]"></div>
+        </article>
+    </section>
+
+    <section id="categories">
+        <h2>카테고리별 맛집</h2>
+        <div class="categories">
+            <a href="https://www.google.co.kr/maps/search/%EC%9C%A0%EC%84%B1+%ED%95%9C%EC%8B%9D?hl=ko&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">한식</a>
+            <a href="https://www.google.co.kr/maps/search/%EC%9C%A0%EC%84%B1+%EC%A4%91%EC%8B%9D/data=!3m1!4b1?hl=ko&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">중식</a>
+            <a href="https://www.google.co.kr/maps/search/%EC%9C%A0%EC%84%B1+%EC%9D%BC%EC%8B%9D?hl=ko&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">일식</a>
+            <a href="https://www.google.co.kr/maps/search/%EC%9C%A0%EC%84%B1+%EB%94%94%EC%A0%80%ED%8A%B8?hl=ko&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">디저트</a>
+            <a href="https://www.google.co.kr/maps/search/%EC%9C%A0%EC%84%B1+%EC%B9%B4%ED%8E%98?hl=ko&entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">카페</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>2024 충남대 맛집 지도 | 202401669 정지오</p>
+    </footer>
+</body>
+</html>
